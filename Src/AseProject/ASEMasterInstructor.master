@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AseMaster.master.cs" Inherits="AseMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ASEMasterInstructor.master.cs" Inherits="ASEMasterInstructor" %>
 
 <!DOCTYPE html>
 
@@ -82,4 +82,3 @@
     
 </body>
 </html>
- 

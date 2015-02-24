@@ -43,13 +43,13 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img src="images/Carousel1.jpg" alt="First slide">
+          <img src="images/Carousel1.jpg" style="margin-left:77px;" alt="First slide"/>
         </div>
         <div class="item">
-          <img src="images/Carousel2.jpg" alt="Second slide">  
+          <img src="images/Carousel2.jpg" style="margin-left:77px;" alt="Second slide"/>  
         </div>
         <div class="item">
-          <img src="images/Carousel3.jpg" alt="Third slide">
+          <img src="images/Carousel3.jpg" style="margin-left:77px;" alt="Third slide"/>
         </div>
       </div>
       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -75,7 +75,8 @@
             
           
         </div>
-         <asp:Button ID="Button1" CssClass="btn btn-lg btn-primary btn-block" style="width:400px;margin-left:500px;" runat="server" Text="Sign In"/>
+         <asp:Button ID="btnLogin" CssClass="btn btn-lg btn-primary btn-block" style="width:400px;margin-left:500px;" runat="server" Text="Sign In" OnClick="btnLogin_Click"/>
+         <asp:Label ID="lblErrorMessage" style="margin-left:650px;" runat="server" Font-Bold="True" Font-Italic="True"></asp:Label>
       </form>
    
 
