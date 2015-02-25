@@ -43,13 +43,13 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img src="images/Carousel1.jpg" style="margin-left:77px;" alt="First slide"/>
+          <img src="images/1.jpg" style="width:1200px;margin-left:83px;" alt="Second slide"/>  
         </div>
         <div class="item">
-          <img src="images/Carousel2.jpg" style="margin-left:77px;" alt="Second slide"/>  
+          <img src="images/2.jpg" style="width:1200px;margin-left:83px;" alt="Third slide"/>
         </div>
-        <div class="item">
-          <img src="images/Carousel3.jpg" style="margin-left:77px;" alt="Third slide"/>
+           <div class="item">
+          <img src="images/3.jpg" style="width:1200px;margin-left:83px;" alt="First slide"/>
         </div>
       </div>
       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
