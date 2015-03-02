@@ -10,7 +10,8 @@ public partial class Login : System.Web.UI.Page
     LoginBAL daobj = new LoginBAL();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        diverror.Visible = false;
+        diverror2.Visible = false;
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -23,8 +24,7 @@ public partial class Login : System.Web.UI.Page
         }
         else if(ret==2)
         {
-            lblErrorMessage.ForeColor = System.Drawing.Color.Red;
-            lblErrorMessage.Text = "Incorrect Password";
+            diverror.Visible = true;
         }
         else if(ret==3)
         {
@@ -32,13 +32,11 @@ public partial class Login : System.Web.UI.Page
         }
         else if(ret==4)
         {
-             lblErrorMessage.ForeColor = System.Drawing.Color.Red;
-             lblErrorMessage.Text = "Incorrect Password";
+             diverror.Visible = true;
         }
         else if(ret==5)
         {
-             lblErrorMessage.ForeColor = System.Drawing.Color.Red;
-             lblErrorMessage.Text = "User DoesNot Exist";
+             diverror2.Visible = true;
         }
     }
 }

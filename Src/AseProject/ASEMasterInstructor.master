@@ -11,8 +11,9 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
      <link href="css/bootstrap.min.css" rel="stylesheet"/>
-     <link href="css/navbar.css" rel="stylesheet"/>
-     <link href="css/style.css" rel="stylesheet"/>
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"/>
+  <script src="js/jquery-1.10.2.js"></script>
+  <script src="js/jquery-ui.js"></script>
 
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -28,38 +29,46 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">The Campus Network</a>
+         
         </div>
           <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="StudentHomePage.aspx">Home</a></li>
-            <li><a href="#about">Requests</a></li>
+              <li><a href="#">The Campus Network</a></li>
+            <li class="active"><a href="InstructorHomePage.aspx">Home</a></li>
+               <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Requests <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="ManageAppointments.aspx">Manage Appointments</a></li>
+                  <li><a href="#">Appointment Requests<span class="badge badge-important" style="margin-left:5px;">
+                    <asp:Label ID="Label" runat="server" Text=" 40"></asp:Label></span></a></li>
+              </ul>
+                </li>
             <li><a href="#contact">Performance</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
+                <li><a href="#">Another action <span class="badge badge-important">
+                    <asp:Label ID="Label1" runat="server" Text="40"></asp:Label></span></a></li>
                 <li><a href="#">Something else here</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">Nav header</li>
                 <li><a href="#">Separated link</a></li>
                 <li><a href="#">One more separated link</a></li>
               </ul>
-            </li>
-              <li>
-                  <asp:LinkButton ID="btnLogout" CssClass="linkbutton" OnClick="btnLogout_Click" runat="server">Logout</asp:LinkButton>
+                </li>
+              <li style="margin-left:500px;">
+                  <asp:LinkButton ID="btnLogout"  OnClick="btnLogout_Click" runat="server">Logout</asp:LinkButton>
               </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-        <div class="container">
+        <div class="container" style="min-height:635px;">
            </br>
             </br>
-            </br>
-            </br>
+         </br>
               <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>
@@ -71,11 +80,7 @@
     </footer>
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     </form>

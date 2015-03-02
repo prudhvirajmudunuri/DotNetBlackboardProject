@@ -28,10 +28,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">The Campus Network</a>
+          
         </div>
           <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
+               <li><a href="#">The Campus Network</a></li>
             <li class="active"><a href="StudentHomePage.aspx">Home</a></li>
             <li><a href="#about">Requests</a></li>
             <li><a href="#contact">Performance</a></li>
@@ -47,8 +48,8 @@
                 <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
-              <li>
-                  <asp:LinkButton ID="btnLogout" CssClass="linkbutton" OnClick="btnLogout_Click" runat="server">Logout</asp:LinkButton>
+              <li style="margin-left:500px;">
+                  <asp:LinkButton ID="btnLogout"  OnClick="btnLogout_Click" runat="server">Logout</asp:LinkButton>
               </li>
           </ul>
         </div><!--/.nav-collapse -->

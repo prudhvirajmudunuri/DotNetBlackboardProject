@@ -76,6 +76,15 @@
           
         </div>
          <asp:Button ID="btnLogin" CssClass="btn btn-lg btn-primary btn-block" style="width:400px;margin-left:500px;" runat="server" Text="Sign In" OnClick="btnLogin_Click"/>
+         <div class="alert alert-danger alert-dismissible" id="diverror" runat="server" role="alert">
+ <div style="margin-left:580px;"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span><strong>Error! Incorrect Password.</strong></div>
+</div>
+                <div class="alert alert-danger alert-dismissible" id="diverror2" runat="server" role="alert">
+                    
+ <div style="margin-left:580px;"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span><strong>Error! User does not Exist. </strong></div>
+</div>
          <asp:Label ID="lblErrorMessage" style="margin-left:650px;" runat="server" Font-Bold="True" Font-Italic="True"></asp:Label>
       </form>
    
