@@ -28,6 +28,7 @@ public partial class Login : System.Web.UI.Page
         }
         else if(ret==3)
         {
+            Session["Email"] = inputEmail.Value;
             Response.Redirect("InstructorHomePage.aspx");
         }
         else if(ret==4)
