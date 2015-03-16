@@ -28,4 +28,8 @@ public class ManageAppointmentsBAL
      {
          return daobj.GetAppointments(InstructorId);
      }
+     public int DeleteAppointments(int InstructorId, string AppointmentDate, string FromTime, string ToTime)
+     {
+         return daobj.DeleteAppointments(InstructorId,AppointmentDate,FromTime,ToTime);
+     }
 }

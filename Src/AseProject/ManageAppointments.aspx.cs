@@ -18,12 +18,6 @@ public partial class ManageAppointments : System.Web.UI.Page
         }
         diverror.Visible = false;
         divSuccess.Visible = false;
-
-        daobj.GetInstructorId(Session["Email"].ToString(), out InstructorId);
-        DataTable dt = daobj.GetAppointments(InstructorId);
-        gvAppointments.DataSource = dt;
-        gvAppointments.DataBind();
-
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
@@ -47,9 +41,11 @@ public partial class ManageAppointments : System.Web.UI.Page
             diverror.Visible = true;
         }
     }
+
     protected void PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gvAppointments.PageIndex = e.NewPageIndex;
         gvAppointments.DataBind();
     }
+
 }

@@ -100,32 +100,36 @@
       </div>
   <h3>Cancel Appointments</h3>
   <div style="border-left:30px;">
-        <asp:UpdatePanel ID="UpAppointments" runat="server">
+        <asp:UpdatePanel ID="UpAppointments" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                 <asp:GridView ID="gvAppointments" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" OnPageIndexChanging="PageIndexChanging" PageSize="9" AllowPaging="True" EmptyDataText="No Records Found">
+                 <asp:GridView ID="gvAppointments" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" OnPageIndexChanging="PageIndexChanging" PageSize="9" AllowPaging="True" EmptyDataText="No Records Found" DataSourceID="SqlDbGv" DataKeyNames="InstructorId,AppointmentDate,FromTime,ToTime">
             <Columns>
-                <asp:BoundField DataField="AppointmentDate" HeaderText="Appointment Date" DataFormatString="{0:D}" >
-                <HeaderStyle HorizontalAlign="Center" Width="250px" Height ="35px"/>
-                <ItemStyle HorizontalAlign="Center" Width="250px" Height ="35px" />
+                <asp:BoundField DataField="InstructorId" Visible="false" HeaderText="InstructorId" SortExpression="InstructorId" ReadOnly="True" InsertVisible="True">
+                <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                 </asp:BoundField>
-                <asp:BoundField DataField="FromTime" HeaderText="From Time">
-                <HeaderStyle HorizontalAlign="Center" Width="150px"/>
-                <ItemStyle HorizontalAlign="Center" Width="150px"/>
+                <asp:BoundField DataField="AppointmentDate" HeaderText="Appointment Date" SortExpression="AppointmentDate" ReadOnly="True" DataFormatString="{0:d}">
+                <HeaderStyle HorizontalAlign="Center" Height ="35px" VerticalAlign="Middle" Width="200px" Wrap="True"/>
+                <ItemStyle HorizontalAlign="Center" Height ="35px" Width="200px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="ToTime" HeaderText="To Time" >
-                <HeaderStyle HorizontalAlign="Center" Width="150px"/>
-                <ItemStyle HorizontalAlign="Center" Width="150px"/>
+                <asp:BoundField DataField="FromTime" HeaderText="FromTime" SortExpression="FromTime" ReadOnly="True" >
+                <HeaderStyle HorizontalAlign="Center" Width="130px"/>
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="130px"/>
                 </asp:BoundField>
-                <asp:BoundField DataField="AppointmentDuration" HeaderText="Duration" >
-                <HeaderStyle HorizontalAlign="Center" Width="100px"/>
+                <asp:BoundField DataField="ToTime" HeaderText="ToTime" SortExpression="ToTime" ReadOnly="True" >
+                <HeaderStyle HorizontalAlign="Center" Width="130px"/>
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="130px"/>
+                </asp:BoundField>
+                <asp:BoundField DataField="AppointmentDuration" HeaderText="Duration" SortExpression="AppointmentDuration" >
+                <HeaderStyle HorizontalAlign="Center"/>
                 <ItemStyle HorizontalAlign="Center" Width="100px"/>
                 </asp:BoundField>
-                <asp:BoundField DataField="MaxAppointments" HeaderText="Max Appointments" >
-                <HeaderStyle HorizontalAlign="Center" Width="200px"/>
-                <ItemStyle HorizontalAlign="Center" Width="200px"/>
-                </asp:BoundField>
-                <asp:CommandField ButtonType="Button" ShowDeleteButton="True" HeaderText="Cancel Appointments">
+                <asp:BoundField DataField="MaxAppointments" HeaderText="MaxAppointments" SortExpression="MaxAppointments">
+                  <HeaderStyle HorizontalAlign="Center"/>
+                <ItemStyle HorizontalAlign="Center" Width="100px"/>
+                     </asp:BoundField>
+                <asp:CommandField ButtonType="Button" ShowDeleteButton="True" HeaderText="Cancel Appointments" HeaderStyle-HorizontalAlign="Center">
                 <ControlStyle CssClass="btn btn-lg btn-primary btn-block" />
+                <HeaderStyle HorizontalAlign="Center" />
                 </asp:CommandField>
             </Columns>
             <EmptyDataRowStyle Font-Bold="True" Font-Italic="True" ForeColor="Red" HorizontalAlign="Center" VerticalAlign="Middle" />
@@ -138,6 +142,34 @@
             <SortedDescendingCellStyle BackColor="#E5E5E5" />
             <SortedDescendingHeaderStyle BackColor="#242121" />
         </asp:GridView>
+                 <asp:SqlDataSource ID="SqlDbGv" runat="server" ConnectionString="<%$ ConnectionStrings:ASEProjectConnectionString %>" SelectCommand="SELECT * FROM [tbl_SetAppointments]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [tbl_SetAppointments] WHERE [InstructorId] = @original_InstructorId AND [AppointmentDate] = @original_AppointmentDate AND [FromTime] = @original_FromTime AND [ToTime] = @original_ToTime AND (([AppointmentDuration] = @original_AppointmentDuration) OR ([AppointmentDuration] IS NULL AND @original_AppointmentDuration IS NULL)) AND (([MaxAppointments] = @original_MaxAppointments) OR ([MaxAppointments] IS NULL AND @original_MaxAppointments IS NULL))" InsertCommand="INSERT INTO [tbl_SetAppointments] ([InstructorId], [AppointmentDate], [FromTime], [ToTime], [AppointmentDuration], [MaxAppointments]) VALUES (@InstructorId, @AppointmentDate, @FromTime, @ToTime, @AppointmentDuration, @MaxAppointments)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [tbl_SetAppointments] SET [AppointmentDuration] = @AppointmentDuration, [MaxAppointments] = @MaxAppointments WHERE [InstructorId] = @original_InstructorId AND [AppointmentDate] = @original_AppointmentDate AND [FromTime] = @original_FromTime AND [ToTime] = @original_ToTime AND (([AppointmentDuration] = @original_AppointmentDuration) OR ([AppointmentDuration] IS NULL AND @original_AppointmentDuration IS NULL)) AND (([MaxAppointments] = @original_MaxAppointments) OR ([MaxAppointments] IS NULL AND @original_MaxAppointments IS NULL))">
+                     <DeleteParameters>
+                         <asp:Parameter Name="original_InstructorId" Type="Int32" />
+                         <asp:Parameter DbType="Date" Name="original_AppointmentDate" />
+                         <asp:Parameter DbType="Time" Name="original_FromTime" />
+                         <asp:Parameter DbType="Time" Name="original_ToTime" />
+                         <asp:Parameter Name="original_AppointmentDuration" Type="Int32" />
+                         <asp:Parameter Name="original_MaxAppointments" Type="Int32" />
+                     </DeleteParameters>
+                     <InsertParameters>
+                         <asp:Parameter Name="InstructorId" Type="Int32" />
+                         <asp:Parameter DbType="Date" Name="AppointmentDate" />
+                         <asp:Parameter DbType="Time" Name="FromTime" />
+                         <asp:Parameter DbType="Time" Name="ToTime" />
+                         <asp:Parameter Name="AppointmentDuration" Type="Int32" />
+                         <asp:Parameter Name="MaxAppointments" Type="Int32" />
+                     </InsertParameters>
+                     <UpdateParameters>
+                         <asp:Parameter Name="AppointmentDuration" Type="Int32" />
+                         <asp:Parameter Name="MaxAppointments" Type="Int32" />
+                         <asp:Parameter Name="original_InstructorId" Type="Int32" />
+                         <asp:Parameter DbType="Date" Name="original_AppointmentDate" />
+                         <asp:Parameter DbType="Time" Name="original_FromTime" />
+                         <asp:Parameter DbType="Time" Name="original_ToTime" />
+                         <asp:Parameter Name="original_AppointmentDuration" Type="Int32" />
+                         <asp:Parameter Name="original_MaxAppointments" Type="Int32" />
+                     </UpdateParameters>
+                 </asp:SqlDataSource>
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="gvAppointments" EventName="PageIndexChanging" />
