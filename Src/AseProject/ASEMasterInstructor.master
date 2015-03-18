@@ -40,7 +40,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Requests <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="ManageAppointments.aspx">Manage Appointments</a></li>
-                  <li><a href="#">Appointment Requests<span class="badge badge-important" style="margin-left:5px;">
+                  <li><a href="AppointmentRequests.aspx">Appointment Requests<span class="badge badge-important" style="margin-left:5px;">
                     <asp:Label ID="Label" runat="server" Text=" 40"></asp:Label></span></a></li>
               </ul>
                 </li>

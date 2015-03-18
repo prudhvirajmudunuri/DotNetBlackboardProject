@@ -130,7 +130,7 @@
             <SortedDescendingHeaderStyle BackColor="#242121" />
 
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDsRequests" runat="server" ConnectionString="<%$ ConnectionStrings:ASEDataBase %>" DeleteCommand="DELETE FROM [tbl_AppointmentRequests] WHERE [AppointmentId] = @original_AppointmentId" InsertCommand="INSERT INTO [tbl_AppointmentRequests] ([SSO], [AppointmentDate], [InstructorName], [AppointmentTime], [AppointmentType], [Description], [AppointmentStatus]) VALUES (@SSO, @AppointmentDate, @InstructorName, @AppointmentTime, @AppointmentType, @Description, @AppointmentStatus)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [tbl_AppointmentRequests]" UpdateCommand="UPDATE [tbl_AppointmentRequests] SET [SSO] = @SSO, [AppointmentDate] = @AppointmentDate, [InstructorName] = @InstructorName, [AppointmentTime] = @AppointmentTime, [AppointmentType] = @AppointmentType, [Description] = @Description, [AppointmentStatus] = @AppointmentStatus WHERE [AppointmentId] = @original_AppointmentId">
+        <asp:SqlDataSource ID="SqlDsRequests" runat="server" ConnectionString="<%$ ConnectionStrings:ASEDataBase %>" DeleteCommand="DELETE FROM [tbl_AppointmentRequests] WHERE [AppointmentId] = @original_AppointmentId" InsertCommand="INSERT INTO [tbl_AppointmentRequests] ([SSO], [AppointmentDate], [InstructorName], [AppointmentTime], [AppointmentType], [Description], [AppointmentStatus]) VALUES (@SSO, @AppointmentDate, @InstructorName, @AppointmentTime, @AppointmentType, @Description, @AppointmentStatus)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [tbl_AppointmentRequests] WHERE ([SSO] = @SSO)" UpdateCommand="UPDATE [tbl_AppointmentRequests] SET [SSO] = @SSO, [AppointmentDate] = @AppointmentDate, [InstructorName] = @InstructorName, [AppointmentTime] = @AppointmentTime, [AppointmentType] = @AppointmentType, [Description] = @Description, [AppointmentStatus] = @AppointmentStatus WHERE [AppointmentId] = @original_AppointmentId">
             <DeleteParameters>
                 <asp:Parameter Name="original_AppointmentId" Type="Int32" />
             </DeleteParameters>
@@ -143,6 +143,9 @@
                 <asp:Parameter Name="Description" Type="String" />
                 <asp:Parameter Name="AppointmentStatus" Type="String" />
             </InsertParameters>
+            <SelectParameters>
+                <asp:SessionParameter DefaultValue="123" Name="SSO" SessionField="SSO" Type="Int32" />
+            </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="SSO" Type="Int32" />
                 <asp:Parameter DbType="Date" Name="AppointmentDate" />

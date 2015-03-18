@@ -8,6 +8,8 @@ using System.Web.UI.WebControls;
 public partial class Login : System.Web.UI.Page
 {
     LoginBAL daobj = new LoginBAL();
+    ApplyAppointmentsBAL daobj2 = new ApplyAppointmentsBAL();
+    Service svcobj = new Service();
     protected void Page_Load(object sender, EventArgs e)
     {
         diverror.Visible = false;
@@ -16,10 +18,14 @@ public partial class Login : System.Web.UI.Page
 
     protected void btnLogin_Click(object sender, EventArgs e)
     {
-        int ret = daobj.Login(inputEmail.Value,inputPassword.Value);
+        //int ret = daobj.Login(inputEmail.Value,inputPassword.Value);
+        int ret = svcobj.Login(inputEmail.Value, inputPassword.Value);
         if(ret==1)
         {
             Session["Email"] = inputEmail.Value;
+            int SSO = -99;
+            daobj2.GetStudentId(Session["Email"].ToString(), out SSO);
+            Session["SSO"] = SSO;
             Response.Redirect("StudentHomePage.aspx");
         }
         else if(ret==2)
@@ -29,6 +35,10 @@ public partial class Login : System.Web.UI.Page
         else if(ret==3)
         {
             Session["Email"] = inputEmail.Value;
+            string Email = Session["Email"].ToString();
+            string InstructorName = "";
+            daobj2.GetInstructorNameByEmail(Email, out InstructorName);
+            Session["InstructorName"] = InstructorName;
             Response.Redirect("InstructorHomePage.aspx");
         }
         else if(ret==4)

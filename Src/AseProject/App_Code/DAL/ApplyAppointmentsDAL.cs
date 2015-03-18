@@ -140,4 +140,68 @@ public class ApplyAppointmentsDAL
         }
         return returnValue;
     }
+
+
+    public int GetInstructorNameByEmail(string Email, out string InstructorName)
+    {
+        int returnValue = -99;
+        InstructorName = "";
+        SqlCommand cmdVisitCount = new SqlCommand("usp_GetInstructorNameByEmail", con);
+        cmdVisitCount.CommandType = CommandType.StoredProcedure;
+        cmdVisitCount.Parameters.AddWithValue("@Email",Email);
+
+        SqlParameter RetValue = new SqlParameter();
+        RetValue.Direction = ParameterDirection.ReturnValue;
+        RetValue.SqlDbType = SqlDbType.Int;
+        cmdVisitCount.Parameters.Add(RetValue);
+
+        SqlParameter vc = new SqlParameter("@InstructorName", SqlDbType.VarChar,50);
+        vc.Direction = ParameterDirection.Output;
+        cmdVisitCount.Parameters.Add(vc);
+        try
+        {
+            con.Open();
+            cmdVisitCount.ExecuteNonQuery();
+            returnValue = Convert.ToInt32(RetValue.Value);
+            InstructorName = vc.Value.ToString();
+        }
+        catch (SqlException)
+        {
+            returnValue = -99;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return returnValue;
+    }
+
+    public int AppRejAppointments(int AppointmentId,string StatusUpdate)
+    {
+        int returnValue = -99;
+        SqlCommand cmd = new SqlCommand("AppRejAppointments", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@AppointmentId", AppointmentId);
+        cmd.Parameters.AddWithValue("@StatusUpdate", StatusUpdate);
+
+        SqlParameter RetValue = new SqlParameter();
+        RetValue.Direction = ParameterDirection.ReturnValue;
+        RetValue.SqlDbType = SqlDbType.Int;
+        cmd.Parameters.Add(RetValue);
+        try
+        {
+            con.Open();
+            cmd.ExecuteNonQuery();
+            returnValue = Convert.ToInt32(RetValue.Value);
+        }
+        catch (SqlException)
+        {
+            returnValue = -99;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return returnValue;
+    }
 }

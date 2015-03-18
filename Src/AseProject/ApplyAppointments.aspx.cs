@@ -82,10 +82,12 @@ public partial class ApplyAppointments : System.Web.UI.Page
             else if (e.Row.Cells[7].Text == "Rejected")
             {
                 e.Row.Cells[7].ForeColor = System.Drawing.Color.Red;
+                e.Row.Cells[8].Enabled = false;
             }
             else if (e.Row.Cells[7].Text == "Approved")
             {
                 e.Row.Cells[7].ForeColor = System.Drawing.Color.Green;
+                e.Row.Cells[8].Enabled = false;
             }
         }
     }

@@ -34,4 +34,14 @@ public class ApplyAppointmentsBAL
     {
         return daobj.GetStudentId(Email, out SSO);
     }
+
+    public int GetInstructorNameByEmail(string Email, out string InstructorName)
+    {
+       return daobj.GetInstructorNameByEmail(Email,out InstructorName);
+    }
+
+    public int AppRejAppointments(int AppointmentId, string StatusUpdate)
+    {
+        return daobj.AppRejAppointments(AppointmentId,StatusUpdate);
+    }
 }
