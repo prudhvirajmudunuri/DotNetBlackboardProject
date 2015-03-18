@@ -12,7 +12,31 @@
     <meta name="author" content=""/>
      <link href="css/bootstrap.min.css" rel="stylesheet"/>
      <link href="css/navbar.css" rel="stylesheet"/>
-
+    <script>
+        function service(Name,passwd)
+        {
+            var echo = function (dataPass) {
+                $.ajax({
+                    type: "POST",
+                    url: "/echo/json/",
+                    data: dataPass,
+                    cache: false,
+                    success: function (json) {
+                        alert("UID=" + json.id + "\nName=" + json.name);
+                    }
+                });
+            };
+            $('.list').live('click', function () {
+                $.get("http://localhost:49177/AseProject/Service.svc/name/passwd", function (data) {
+                    var json = {
+                        json: JSON.stringify(data),
+                        delay: 1
+                    };
+                    echo(json);
+                });
+            });
+        }
+        </script>
 </head>
     <body>
  <!-- Fixed navbar -->

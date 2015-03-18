@@ -9,7 +9,6 @@ public partial class Login : System.Web.UI.Page
 {
     LoginBAL daobj = new LoginBAL();
     ApplyAppointmentsBAL daobj2 = new ApplyAppointmentsBAL();
-    Service svcobj = new Service();
     protected void Page_Load(object sender, EventArgs e)
     {
         diverror.Visible = false;
@@ -18,8 +17,7 @@ public partial class Login : System.Web.UI.Page
 
     protected void btnLogin_Click(object sender, EventArgs e)
     {
-        //int ret = daobj.Login(inputEmail.Value,inputPassword.Value);
-        int ret = svcobj.Login(inputEmail.Value, inputPassword.Value);
+        int ret = daobj.Login(inputEmail.Value,inputPassword.Value);
         if(ret==1)
         {
             Session["Email"] = inputEmail.Value;

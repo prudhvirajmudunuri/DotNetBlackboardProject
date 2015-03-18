@@ -1,0 +1,7 @@
+E:\Study\ASE\Lab 6\NunitTesting\NunitTesting\bin\Debug\NunitTesting.dll
+E:\Study\ASE\Lab 6\NunitTesting\NunitTesting\bin\Debug\NunitTesting.pdb
+E:\Study\ASE\Lab 6\NunitTesting\NunitTesting\bin\Debug\nunit.framework.dll
+E:\Study\ASE\Lab 6\NunitTesting\NunitTesting\bin\Debug\nunit.framework.xml
+E:\Study\ASE\Lab 6\NunitTesting\NunitTesting\obj\Debug\NunitTesting.csprojResolveAssemblyReference.cache
+E:\Study\ASE\Lab 6\NunitTesting\NunitTesting\obj\Debug\NunitTesting.dll
+E:\Study\ASE\Lab 6\NunitTesting\NunitTesting\obj\Debug\NunitTesting.pdb

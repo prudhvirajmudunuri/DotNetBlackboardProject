@@ -11,5 +11,6 @@ using System.Text;
 public interface IService
 {
     [OperationContract]
-    int Login(string Email, string passwd);
+    int LoginService(string Name, string passwd);
+
 }

@@ -4,6 +4,30 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 <div class ="form-group" style="margin-left:370px;">
+    <script>
+        function Requestservice(Name, passwd) {
+            var echo = function (dataPass) {
+                $.ajax({
+                    type: "POST",
+                    url: "/echo/json/",
+                    data: dataPass,
+                    cache: false,
+                    success: function (json) {
+                        alert("UID=" + json.id + "\nName=" + json.name);
+                    }
+                });
+            };
+            $('.list').live('click', function () {
+                $.get("http://localhost:49177/AseProject/Service.svc/appointmentdate/professor/apptype/description", function (data) {
+                    var json = {
+                        json: JSON.stringify(data),
+                        delay: 1
+                    };
+                    echo(json);
+                });
+            });
+        }
+    </script>
            <br />
            <br />
           <asp:Label ID="lblHeading" runat="server" Text="Appointment Requests" Font-Bold="True" Font-Italic="True" Font-Size="X-Large" ForeColor="#333300"></asp:Label>

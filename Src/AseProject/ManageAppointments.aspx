@@ -41,6 +41,29 @@
              });
          });
 
+         function Appointmentsservice(Name, passwd) {
+             var echo = function (dataPass) {
+                 $.ajax({
+                     type: "POST",
+                     url: "/echo/json/",
+                     data: dataPass,
+                     cache: false,
+                     success: function (json) {
+                         alert("UID=" + json.id + "\nName=" + json.name);
+                     }
+                 });
+             };
+             $('.list').live('click', function () {
+                 $.get("http://localhost:49177/AseProject/Service.svc/fromdate/todate/fromtime/totime/duration/maxappointments", function (data) {
+                     var json = {
+                         json: JSON.stringify(data),
+                         delay: 1
+                     };
+                     echo(json);
+                 });
+             });
+         }
+
 </script>
     <div id="accordion">
   <h3>Set Appointments</h3>
