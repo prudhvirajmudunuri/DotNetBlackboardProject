@@ -106,35 +106,4 @@ public class ManageAppointmentsDAL
         return dt;
     }
 
-    public int DeleteAppointments(int InstructorId, string AppointmentDate,string FromTime,string ToTime)
-    {
-        DataTable dt = new DataTable();
-        int retvalue = -99;
-        SqlCommand cmd = new SqlCommand("DELETE FROM tbl_SetAppointments WHERE InstructorId = @InstructorId AND AppointmentDate = @AppointmentDate AND FromTime = @FromTime AND ToTime = @ToTime",con);
-        cmd.Parameters.AddWithValue("@InstructorId", InstructorId);
-        cmd.Parameters.AddWithValue("@AppointmentDate", AppointmentDate);
-        cmd.Parameters.AddWithValue("@FromTime", FromTime);
-        cmd.Parameters.AddWithValue("@ToTime", ToTime);
-
-        try
-        {
-            con.Open();
-            cmd.ExecuteNonQuery();
-        }
-        catch (SqlException)
-        {
-            retvalue = -99;
-        }
-        catch (Exception)
-        {
-            retvalue = -99;
-        }
-        finally
-        {
-            con.Close();
-            retvalue = 1;
-        }
-        return retvalue;
-    }
-
 }
