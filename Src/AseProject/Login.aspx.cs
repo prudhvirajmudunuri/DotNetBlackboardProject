@@ -9,6 +9,7 @@ public partial class Login : System.Web.UI.Page
 {
     LoginBAL daobj = new LoginBAL();
     ApplyAppointmentsBAL daobj2 = new ApplyAppointmentsBAL();
+    ManageAppointmentsBAL daobj3 = new ManageAppointmentsBAL();
     protected void Page_Load(object sender, EventArgs e)
     {
         diverror.Visible = false;
@@ -37,6 +38,9 @@ public partial class Login : System.Web.UI.Page
             string InstructorName = "";
             daobj2.GetInstructorNameByEmail(Email, out InstructorName);
             Session["InstructorName"] = InstructorName;
+            int InstructorId = -99;
+            daobj3.GetInstructorId(Email,out InstructorId);
+            Session["InstructorId"] = InstructorId;
             Response.Redirect("InstructorHomePage.aspx");
         }
         else if(ret==4)
