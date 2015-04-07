@@ -25,6 +25,30 @@
          $(function () {
              $('#<%=Date.ClientID%>').datepicker();
          });
+
+         function ApplyAppointments(Name, passwd) {
+             var echo = function (dataPass) {
+                 $.ajax({
+                     type: "POST",
+                     url: "/echo/json/",
+                     data: dataPass,
+                     cache: false,
+                     success: function (json) {
+
+                     }
+                 });
+             };
+             $('.list').live('click', function () {
+                 $.get("http://localhost:49177/AseProject/Service.svc/apply/date/professor/reason", function (data) {
+                     var json = {
+                         json: JSON.stringify(data),
+                         delay: 1
+                     };
+                     echo(json);
+                 });
+             });
+         }
+
 </script>
     <div id="accordion">
   <h3>Request Appointment</h3>

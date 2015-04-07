@@ -49,7 +49,7 @@
                      data: dataPass,
                      cache: false,
                      success: function (json) {
-                         alert("UID=" + json.id + "\nName=" + json.name);
+                         
                      }
                  });
              };
@@ -165,14 +165,12 @@
             <SortedDescendingCellStyle BackColor="#E5E5E5" />
             <SortedDescendingHeaderStyle BackColor="#242121" />
         </asp:GridView>
-                 <asp:SqlDataSource ID="SqlDbGv" runat="server" ConnectionString="<%$ ConnectionStrings:ASEDataBase %>" SelectCommand="SELECT * FROM [tbl_SetAppointments]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [tbl_SetAppointments] WHERE [InstructorId] = @original_InstructorId AND [AppointmentDate] = @original_AppointmentDate AND [FromTime] = @original_FromTime AND [ToTime] = @original_ToTime AND (([AppointmentDuration] = @original_AppointmentDuration) OR ([AppointmentDuration] IS NULL AND @original_AppointmentDuration IS NULL)) AND (([MaxAppointments] = @original_MaxAppointments) OR ([MaxAppointments] IS NULL AND @original_MaxAppointments IS NULL))" InsertCommand="INSERT INTO [tbl_SetAppointments] ([InstructorId], [AppointmentDate], [FromTime], [ToTime], [AppointmentDuration], [MaxAppointments]) VALUES (@InstructorId, @AppointmentDate, @FromTime, @ToTime, @AppointmentDuration, @MaxAppointments)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [tbl_SetAppointments] SET [AppointmentDuration] = @AppointmentDuration, [MaxAppointments] = @MaxAppointments WHERE [InstructorId] = @original_InstructorId AND [AppointmentDate] = @original_AppointmentDate AND [FromTime] = @original_FromTime AND [ToTime] = @original_ToTime AND (([AppointmentDuration] = @original_AppointmentDuration) OR ([AppointmentDuration] IS NULL AND @original_AppointmentDuration IS NULL)) AND (([MaxAppointments] = @original_MaxAppointments) OR ([MaxAppointments] IS NULL AND @original_MaxAppointments IS NULL))">
+                 <asp:SqlDataSource ID="SqlDbGv" runat="server" ConnectionString="<%$ ConnectionStrings:ASEDataBase %>" SelectCommand="SELECT * FROM [tbl_SetAppointments] WHERE ([InstructorId] = @InstructorId)" DeleteCommand="DELETE FROM [tbl_SetAppointments] WHERE [InstructorId] = @original_InstructorId AND [AppointmentDate] = @original_AppointmentDate AND [FromTime] = @original_FromTime AND [ToTime] = @original_ToTime" InsertCommand="INSERT INTO [tbl_SetAppointments] ([InstructorId], [AppointmentDate], [FromTime], [ToTime], [AppointmentDuration], [MaxAppointments]) VALUES (@InstructorId, @AppointmentDate, @FromTime, @ToTime, @AppointmentDuration, @MaxAppointments)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [tbl_SetAppointments] SET [AppointmentDuration] = @AppointmentDuration, [MaxAppointments] = @MaxAppointments WHERE [InstructorId] = @original_InstructorId AND [AppointmentDate] = @original_AppointmentDate AND [FromTime] = @original_FromTime AND [ToTime] = @original_ToTime">
                      <DeleteParameters>
                          <asp:Parameter Name="original_InstructorId" Type="Int32" />
                          <asp:Parameter DbType="Date" Name="original_AppointmentDate" />
                          <asp:Parameter DbType="Time" Name="original_FromTime" />
                          <asp:Parameter DbType="Time" Name="original_ToTime" />
-                         <asp:Parameter Name="original_AppointmentDuration" Type="Int32" />
-                         <asp:Parameter Name="original_MaxAppointments" Type="Int32" />
                      </DeleteParameters>
                      <InsertParameters>
                          <asp:Parameter Name="InstructorId" Type="Int32" />
@@ -182,6 +180,9 @@
                          <asp:Parameter Name="AppointmentDuration" Type="Int32" />
                          <asp:Parameter Name="MaxAppointments" Type="Int32" />
                      </InsertParameters>
+                     <SelectParameters>
+                         <asp:SessionParameter DefaultValue="11" Name="InstructorId" SessionField="InstructorId" Type="Int32" />
+                     </SelectParameters>
                      <UpdateParameters>
                          <asp:Parameter Name="AppointmentDuration" Type="Int32" />
                          <asp:Parameter Name="MaxAppointments" Type="Int32" />
@@ -189,8 +190,6 @@
                          <asp:Parameter DbType="Date" Name="original_AppointmentDate" />
                          <asp:Parameter DbType="Time" Name="original_FromTime" />
                          <asp:Parameter DbType="Time" Name="original_ToTime" />
-                         <asp:Parameter Name="original_AppointmentDuration" Type="Int32" />
-                         <asp:Parameter Name="original_MaxAppointments" Type="Int32" />
                      </UpdateParameters>
                  </asp:SqlDataSource>
             </ContentTemplate>

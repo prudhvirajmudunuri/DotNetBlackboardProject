@@ -45,5 +45,27 @@ public class Service : IService
          return returnValue;
      }
 
+     public DataTable GetSchedule(string CourseId)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         DataTable dt = new DataTable();
+         SqlDataAdapter da = new SqlDataAdapter();
+         da.SelectCommand = new SqlCommand("SELECT * FROM tbl_CoursePlan WHERE CourseId = @CourseId", con);
+         da.SelectCommand.Parameters.AddWithValue("@CourseId", CourseId);
+         try
+         {
+             da.Fill(dt);
+         }
+         catch (SqlException)
+         {
+             return null;
+         }
+         catch (Exception)
+         {
+             return null;
+         }
+         return dt;
+     }
 
 }

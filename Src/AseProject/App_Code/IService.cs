@@ -13,4 +13,6 @@ public interface IService
     [OperationContract]
     int LoginService(string Name, string passwd);
 
+    [OperationContract]
+    DataTable GetSchedule(string CourseId);
 }

@@ -22,7 +22,7 @@
                     data: dataPass,
                     cache: false,
                     success: function (json) {
-                        alert("UID=" + json.id + "\nName=" + json.name);
+                       
                     }
                 });
             };

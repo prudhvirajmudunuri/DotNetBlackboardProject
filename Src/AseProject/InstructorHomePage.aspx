@@ -3,6 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+     <link href="css/bootstrap.min.css" rel="stylesheet"/>
+     <link href="css/navbar.css" rel="stylesheet"/>
      <script>
          $(function () {
              var icons = {
@@ -75,7 +82,7 @@
            <br />
            <br />
    </div>
-    <asp:GridView ID="gvallotment" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="CourseId" DataSourceID="SqldsAllotment" ForeColor="Black" GridLines="Horizontal">
+    <asp:GridView ID="gvallotment" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="CourseId" DataSourceID="SqldsAllotment" ForeColor="Black" OnRowCommand="gvallotment_RowCommand" GridLines="Horizontal">
         <Columns>
             <asp:BoundField DataField="CourseId" HeaderText="CourseId" ReadOnly="True" SortExpression="CourseId">
              <HeaderStyle Font-Italic="True" Font-Size="Small" Width="200px" />
@@ -118,6 +125,53 @@
             <asp:SessionParameter DefaultValue="11" Name="t1" SessionField="InstructorId" />
         </SelectParameters>
     </asp:SqlDataSource>
+      </br>
+      </br>
+      </br>
+               <asp:UpdatePanel ID="upSchedule" runat="server">
+                   <ContentTemplate>
+                       <div class="alert alert-info alert-dismissible" id="diverror" runat="server" role="alert">
+ <div style="margin-left:340px;"></span>
+  <span class="sr-only">Error:</span><strong>Course Schedule For : <asp:Label ID="lblCourse" runat="server" Text="Label"></asp:Label></strong></div>
+</div>
+                       <asp:GridView ID="gvSchedule" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="False" EmptyDataText="No Records Found">
+                           <Columns>
+                               <asp:BoundField DataField="CourseId" HeaderText="Course Id" Visible="False">
+                                <HeaderStyle Font-Italic="True" Font-Size="Small" Width="200px" Height="35px" />
+                                <ItemStyle Font-Italic="True" Height="20px" />
+                                   </asp:BoundField>
+                               <asp:BoundField DataField="TopicDate" DataFormatString="{0:d}" HeaderText="Date">
+                                 <HeaderStyle Font-Italic="True" Font-Size="Small" Width="200px" Height="35px" />
+                                <ItemStyle Font-Italic="True" Height="20px" />
+                                   </asp:BoundField>
+                               <asp:BoundField DataField="TopicName" HeaderText="Topic">
+                                   <HeaderStyle Font-Italic="True" Font-Size="Small" Width="200px" />
+                                <ItemStyle Font-Italic="True" />
+                                   </asp:BoundField>
+                               <asp:BoundField DataField="Assignment" HeaderText="Assignment">
+                                   <HeaderStyle Font-Italic="True" Font-Size="Small" Width="200px" />
+                                <ItemStyle Font-Italic="True" />
+                                   </asp:BoundField>
+                               <asp:BoundField DataField="AssignmentDeadline" HeaderText="AssignmentDeadline" DataFormatString="{0:d}">
+                                   <HeaderStyle Font-Italic="True" Font-Size="Small" Width="200px" />
+                                <ItemStyle Font-Italic="True" />
+                                   </asp:BoundField>
+                           </Columns>
+                           <EmptyDataRowStyle Font-Bold="True" Font-Italic="True" ForeColor="Red" />
+                           <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                           <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                           <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                           <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                           <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                           <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                           <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                           <SortedDescendingHeaderStyle BackColor="#242121" />
+                       </asp:GridView>
+                   </ContentTemplate>
+                   <Triggers>
+                       <asp:AsyncPostBackTrigger ControlID="gvallotment" EventName="RowCommand" />
+                   </Triggers>
+               </asp:UpdatePanel>
   </div>
     </div>  
 </asp:Content>
