@@ -15,4 +15,22 @@ public interface IService
 
     [OperationContract]
     DataTable GetSchedule(string CourseId);
+
+    [OperationContract]
+    DataTable GetLabs(string CourseId);
+
+    [OperationContract]
+    DataTable GetAssignments(string CourseId);
+
+    [OperationContract]
+    DataTable GetExams(string CourseId);
+
+    [OperationContract]
+    int InsertMarks(int SSO, string CourseId, string TopicName, int TotalMarks, int MarksObtained, int Percentage, string Comments);
+
+    [OperationContract]
+    DataTable GetPerformance(string CourseId,int SSO);
+
+    [OperationContract]
+    int AnalyzePerformance(string CourseId, string TopicName, out int Top1, out int Top2, out int Top3, out int Top4, out int Top5);
 }
