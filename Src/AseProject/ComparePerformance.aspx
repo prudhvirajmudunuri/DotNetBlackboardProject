@@ -206,6 +206,10 @@ legend {
       </br>
         <asp:UpdatePanel ID="upGraph" runat="server" Visible="False">
             <ContentTemplate>
+                                       <div class="alert alert-info alert-dismissible" id="diverror" runat="server" role="alert">
+ <div style="margin-left:140px;"></span>
+  <span class="sr-only">Error:</span><strong>Course: <asp:Label ID="lblCourseId" runat="server" Text="Label"></asp:Label> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Course Strength: <asp:Label ID="lblStrength" runat="server" Text="Label"></asp:Label> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Position: <asp:Label ID="lblPosition" runat="server" Text="Label"></asp:Label> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Percentage: <asp:Label ID="lblPercentage" runat="server" Text="Label"></asp:Label> </strong></div>
+</div>
                  <fieldset class="border">
      <legend>Visualization</legend> 
                       <div id="chartdiv"></div>

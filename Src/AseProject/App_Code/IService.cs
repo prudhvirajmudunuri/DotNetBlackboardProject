@@ -33,4 +33,15 @@ public interface IService
 
     [OperationContract]
     int AnalyzePerformance(string CourseId, string TopicName, out int Top1, out int Top2, out int Top3, out int Top4, out int Top5);
+
+    [OperationContract]
+    int CourseStrength(string CourseId, out int Strength);
+
+    [OperationContract]
+    int GetPosPer(string TopicName, string CourseId, int SSO, out int Position, out int Percentage);
+
+    [OperationContract]
+    int AnalyzeCoursePerformance(string CourseId, out int Top1, out int Top2, out int Top3, out int Top4, out int Top5);
+
+
 }

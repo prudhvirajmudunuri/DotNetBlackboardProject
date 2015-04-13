@@ -37,7 +37,7 @@ public partial class ViewPerformance : System.Web.UI.Page
             }
             else if (Convert.ToInt32(e.Row.Cells[4].Text) >= 70 && Convert.ToInt32(e.Row.Cells[4].Text) < 80)
             {
-                e.Row.Cells[4].ForeColor = System.Drawing.Color.Azure;
+                e.Row.Cells[4].ForeColor = System.Drawing.Color.Blue;
             }
             else if (Convert.ToInt32(e.Row.Cells[4].Text) >= 60 && Convert.ToInt32(e.Row.Cells[4].Text) < 70)
             {

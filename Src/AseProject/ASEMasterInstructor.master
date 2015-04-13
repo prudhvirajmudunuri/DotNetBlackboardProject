@@ -48,6 +48,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Performance <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="InstructorPerformance.aspx">Upload Marks</a></li>
+                  <li><a href="AnalyzePerformanceInst.aspx">Analyze Performance</a></li>
               </ul>
                 </li>
               <li style="margin-left:550px;">

@@ -57,8 +57,17 @@ public partial class ComparePerformance : System.Web.UI.Page
         int Top3 = 0;
         int Top4 = 0;
         int Top5 = 0;
+        int Strength;
+        int Percentage;
+        int Position;
         daobj.AnalyzePerformance(ddlCourse.SelectedValue,ddlAssessment.SelectedValue,out Top1,out Top2,out Top3,out Top4,out Top5);
         ClientScript.RegisterStartupScript(GetType(), "Javascript", "javascript:BarChart(" + Top1 + "," + Top2 + "," + Top3 + "," + Top4 + "," + Top5 + "); ", true);
+        lblCourseId.Text = ddlCourse.SelectedValue;
+        daobj.CourseStrength(ddlCourse.SelectedValue,out Strength);
+        lblStrength.Text = Strength.ToString();
+        daobj.GetPosPer(ddlAssessment.SelectedValue,ddlCourse.SelectedValue,Convert.ToInt32(Session["SSO"]),out Position,out Percentage);
+        lblPosition.Text = Position.ToString();
+        lblPercentage.Text = Percentage.ToString();
 
     }
 }

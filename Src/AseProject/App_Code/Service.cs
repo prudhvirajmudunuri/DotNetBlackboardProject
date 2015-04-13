@@ -254,4 +254,143 @@ public class Service : IService
          }
          return returnValue;
      }
+
+     public int CourseStrength(string CourseId, out int Strength)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         int returnValue = -99;
+         Strength = -99;
+         SqlCommand cmdVisitCount = new SqlCommand("usp_GetStrength", con);
+         cmdVisitCount.CommandType = CommandType.StoredProcedure;
+         cmdVisitCount.Parameters.AddWithValue("@CourseId", CourseId);
+
+         SqlParameter RetValue = new SqlParameter();
+         RetValue.Direction = ParameterDirection.ReturnValue;
+         RetValue.SqlDbType = SqlDbType.Int;
+         cmdVisitCount.Parameters.Add(RetValue);
+
+         SqlParameter vc = new SqlParameter("@Strength", SqlDbType.Int);
+         vc.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc);
+         try
+         {
+             con.Open();
+             cmdVisitCount.ExecuteNonQuery();
+             returnValue = Convert.ToInt32(RetValue.Value);
+             Strength = Convert.ToInt32(vc.Value);
+         }
+         catch (SqlException)
+         {
+             returnValue = -99;
+         }
+         finally
+         {
+             con.Close();
+         }
+         return returnValue;
+     }
+
+     public int GetPosPer(string TopicName, string CourseId,int SSO, out int Position, out int Percentage)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         int returnValue = -99;
+         Position = -99;
+         Percentage = -99;
+         SqlCommand cmdVisitCount = new SqlCommand("usp_GetPosPer", con);
+         cmdVisitCount.CommandType = CommandType.StoredProcedure;
+         cmdVisitCount.Parameters.AddWithValue("@CourseId", CourseId);
+         cmdVisitCount.Parameters.AddWithValue("@TopicName", TopicName);
+         cmdVisitCount.Parameters.AddWithValue("@SSO", SSO);
+
+         SqlParameter RetValue = new SqlParameter();
+         RetValue.Direction = ParameterDirection.ReturnValue;
+         RetValue.SqlDbType = SqlDbType.Int;
+         cmdVisitCount.Parameters.Add(RetValue);
+
+         SqlParameter vc = new SqlParameter("@Position", SqlDbType.Int);
+         vc.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc);
+
+         SqlParameter vc1 = new SqlParameter("@Percentage", SqlDbType.Int);
+         vc1.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc1);
+         try
+         {
+             con.Open();
+             cmdVisitCount.ExecuteNonQuery();
+             returnValue = Convert.ToInt32(RetValue.Value);
+             Percentage = Convert.ToInt32(vc1.Value);
+             Position = Convert.ToInt32(vc.Value);
+         }
+         catch (SqlException)
+         {
+             returnValue = -99;
+         }
+         finally
+         {
+             con.Close();
+         }
+         return returnValue;
+     }
+
+
+
+     public int AnalyzeCoursePerformance(string CourseId,out int Top1, out int Top2, out int Top3, out int Top4, out int Top5)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         int returnValue = -99;
+         Top1 = -99;
+         Top2 = -99;
+         Top3 = -99;
+         Top4 = -99;
+         Top5 = -99;
+         SqlCommand cmdVisitCount = new SqlCommand("tbl_AnalyzeCoursePerformance", con);
+         cmdVisitCount.CommandType = CommandType.StoredProcedure;
+         cmdVisitCount.Parameters.AddWithValue("@CourseId", CourseId);
+
+         SqlParameter RetValue = new SqlParameter();
+         RetValue.Direction = ParameterDirection.ReturnValue;
+         RetValue.SqlDbType = SqlDbType.Int;
+         cmdVisitCount.Parameters.Add(RetValue);
+
+         SqlParameter vc = new SqlParameter("@Top1", SqlDbType.Int);
+         vc.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc);
+         SqlParameter vc1 = new SqlParameter("@Top2", SqlDbType.Int);
+         vc1.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc1);
+         SqlParameter vc2 = new SqlParameter("@Top3", SqlDbType.Int);
+         vc2.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc2);
+         SqlParameter vc3 = new SqlParameter("@Top4", SqlDbType.Int);
+         vc3.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc3);
+         SqlParameter vc4 = new SqlParameter("@Top5", SqlDbType.Int);
+         vc4.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc4);
+         try
+         {
+             con.Open();
+             cmdVisitCount.ExecuteNonQuery();
+             returnValue = Convert.ToInt32(RetValue.Value);
+             Top1 = Convert.ToInt32(vc.Value);
+             Top2 = Convert.ToInt32(vc1.Value);
+             Top3 = Convert.ToInt32(vc2.Value);
+             Top4 = Convert.ToInt32(vc3.Value);
+             Top5 = Convert.ToInt32(vc4.Value);
+         }
+         catch (SqlException)
+         {
+             returnValue = -99;
+         }
+         finally
+         {
+             con.Close();
+         }
+         return returnValue;
+     }
+
 }
