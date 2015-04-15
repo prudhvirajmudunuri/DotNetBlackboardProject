@@ -158,6 +158,29 @@ legend {
              target[property] = this.value;
              chart.validateNow();
          });
+
+         function service(CourseId,SSO,TopicName,Position,Percentage ) {
+             var echo = function (dataPass) {
+                 $.ajax({
+                     type: "POST",
+                     url: "/echo/json/",
+                     data: dataPass,
+                     cache: false,
+                     success: function (json) {
+
+                     }
+                 });
+             };
+             $('.list').live('click', function () {
+                 $.get("http://localhost:49177/AseProject/Service.svc/CourseId/SSO/TopicName/Position/Percentage", function (data) {
+                     var json = {
+                         json: JSON.stringify(data),
+                         delay: 1
+                     };
+                     echo(json);
+                 });
+             });
+         }
     </script>
 
     <div id="accordion">
@@ -266,12 +289,9 @@ legend {
 <asp:Button ID="Button1" CssClass="btn btn-lg btn-primary btn-block" style="width:400px;margin-left:300px;" runat="server" Text="View Performance" OnClick="Button1_Click" />
  </br>
           </br>
-          <asp:UpdatePanel ID="upPerformance" runat="server" Visible="False">
+          <asp:UpdatePanel ID="upPerformance" runat="server" UpdateMode="Conditional">
          <ContentTemplate>
-                                <div class="alert alert-info alert-dismissible" id="div1" runat="server" role="alert">
- <div style="margin-left:240px;"></span>
-  <span class="sr-only">Error:</span><strong>Performance For Course: <asp:Label ID="lblcou" runat="server" Text="Label"></asp:Label></strong></div>
-</div>
+
              <asp:GridView ID="gvPerformance" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" OnRowDataBound="gvPerformance_DataBound" AutoGenerateColumns="False" EmptyDataText="No Records Found">
                  <Columns>
                      <asp:BoundField DataField="CourseId" HeaderText="CourseId">
@@ -310,7 +330,22 @@ legend {
                  <SortedDescendingHeaderStyle BackColor="#242121" />
                                 </asp:GridView>
          </ContentTemplate>
+             <Triggers>
+        <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click" />
+    </Triggers>
      </asp:UpdatePanel>
+      </br>
+   
+
+      </br>
+
+      </br>
+      </br>
+
+      </br>
+
+      </br>
+
 </div>
   </div>
         

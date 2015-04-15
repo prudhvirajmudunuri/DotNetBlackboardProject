@@ -11,7 +11,7 @@ public partial class AnalyzePerformanceInst : System.Web.UI.Page
     Service daobj = new Service();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //div1.Visible = false;
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
@@ -100,7 +100,7 @@ public partial class AnalyzePerformanceInst : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        upPerformance.Visible = true;
+        
         DataTable dt;
         dt = daobj.GetPerformance(DropDownList1.SelectedValue, Convert.ToInt32(TextBox1.Text));
         gvPerformance.DataSource = dt;
@@ -127,7 +127,6 @@ public partial class AnalyzePerformanceInst : System.Web.UI.Page
             {
                 e.Row.Cells[4].ForeColor = System.Drawing.Color.Brown;
             }
-
         }
     }
 }
