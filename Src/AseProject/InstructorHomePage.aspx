@@ -27,6 +27,29 @@
                  }
              });
          });
+
+         function service(CourseId, InstructorId) {
+             var echo = function (dataPass) {
+                 $.ajax({
+                     type: "POST",
+                     url: "/echo/json/",
+                     data: dataPass,
+                     cache: false,
+                     success: function (json) {
+
+                     }
+                 });
+             };
+             $('.list').live('click', function () {
+                 $.get("http://localhost:49177/AseProject/Service.svc/CourseId/InstructorId", function (data) {
+                     var json = {
+                         json: JSON.stringify(data),
+                         delay: 1
+                     };
+                     echo(json);
+                 });
+             });
+         }
          </script>
     <div id="accordion">
   <h3>Assigned Courses Progress</h3>

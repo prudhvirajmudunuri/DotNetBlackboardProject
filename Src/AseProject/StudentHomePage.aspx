@@ -31,6 +31,29 @@
          $('#myModal').on('shown.bs.modal', function () {
              $('#myInput').focus()
          })
+
+         function service(CourseId, SSO) {
+             var echo = function (dataPass) {
+                 $.ajax({
+                     type: "POST",
+                     url: "/echo/json/",
+                     data: dataPass,
+                     cache: false,
+                     success: function (json) {
+
+                     }
+                 });
+             };
+             $('.list').live('click', function () {
+                 $.get("http://localhost:49177/AseProject/Service.svc/CourseId/SSO", function (data) {
+                     var json = {
+                         json: JSON.stringify(data),
+                         delay: 1
+                     };
+                     echo(json);
+                 });
+             });
+         }
          </script>
     <div id="accordion">
   <h3>Course Progress And Important Dates</h3>
