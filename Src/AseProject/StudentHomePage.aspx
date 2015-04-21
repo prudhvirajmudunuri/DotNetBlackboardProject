@@ -45,7 +45,7 @@
                  });
              };
              $('.list').live('click', function () {
-                 $.get("http://localhost:49177/AseProject/Service.svc/CourseId/SSO", function (data) {
+                 $.get("http://localhost:49177/AseProject/Service.svc/CourseId/InstructorId", function (data) {
                      var json = {
                          json: JSON.stringify(data),
                          delay: 1

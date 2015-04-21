@@ -44,6 +44,12 @@
                     <asp:Label ID="Label" runat="server" Text=" 40"></asp:Label></span></a></li>
               </ul>
                 </li>
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Course Plan <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="AddSchedule.aspx">Add/Edit Course Plan</a></li>
+              </ul>
+                </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Performance <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -51,7 +57,7 @@
                   <li><a href="AnalyzePerformanceInst.aspx">Analyze Performance</a></li>
               </ul>
                 </li>
-              <li style="margin-left:550px;">
+              <li style="margin-left:450px;">
                   <asp:LinkButton ID="btnLogout"  OnClick="btnLogout_Click" runat="server">Logout</asp:LinkButton>
               </li>
           </ul>

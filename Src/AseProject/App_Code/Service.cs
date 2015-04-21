@@ -393,4 +393,37 @@ public class Service : IService
          return returnValue;
      }
 
+     public int InsertSchedule(string CourseId, string TopicDate, string TopicName,string Assignment,string AssignmentDeadline)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         DataTable dt = new DataTable();
+         int retvalue = -99;
+         SqlCommand cmd = new SqlCommand("INSERT INTO tbl_CoursePlan(CourseId,TopicDate,TopicName,Assignment,AssignmentDeadline) VALUES(@CourseId,@TopicDate,@TopicName,@Assignment,@AssignmentDeadline) ", con);
+         cmd.Parameters.AddWithValue("@CourseId", CourseId);
+         cmd.Parameters.AddWithValue("@TopicDate", TopicDate);
+         cmd.Parameters.AddWithValue("@TopicName", TopicName);
+         cmd.Parameters.AddWithValue("@Assignment", Assignment);
+         cmd.Parameters.AddWithValue("@AssignmentDeadline", AssignmentDeadline);
+         try
+         {
+             con.Open();
+             cmd.ExecuteNonQuery();
+         }
+         catch (SqlException)
+         {
+             retvalue = -99;
+         }
+         catch (Exception)
+         {
+             retvalue = -99;
+         }
+         finally
+         {
+             con.Close();
+             retvalue = 1;
+         }
+         return retvalue;
+     }
+
 }
