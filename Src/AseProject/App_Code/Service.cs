@@ -426,4 +426,119 @@ public class Service : IService
          return retvalue;
      }
 
+     public int SetAttendance(string CourseId, string AttendanceDate, int Latitude, int Longitude, string RandomCode, string StartTime, string EndTime)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         DataTable dt = new DataTable();
+         int retvalue = -99;
+         SqlCommand cmd = new SqlCommand("INSERT INTO tbl_SetAttendance(CourseId,AttendanceDate,Latitude,Longitude,RandomCode,StartTime,EndTime) VALUES(@CourseId,@AttendanceDate,@Latitude,@Longitude,@RandomCode,@StartTime,@EndTime) ", con);
+         cmd.Parameters.AddWithValue("@CourseId", CourseId);
+         cmd.Parameters.AddWithValue("@AttendanceDate", AttendanceDate);
+         cmd.Parameters.AddWithValue("@Latitude", Latitude);
+         cmd.Parameters.AddWithValue("@Longitude", Longitude);
+         cmd.Parameters.AddWithValue("@RandomCode", RandomCode);
+         cmd.Parameters.AddWithValue("@StartTime", StartTime);
+         cmd.Parameters.AddWithValue("@EndTime", EndTime);
+         try
+         {
+             con.Open();
+             cmd.ExecuteNonQuery();
+         }
+         catch (SqlException)
+         {
+             retvalue = -99;
+         }
+         catch (Exception)
+         {
+             retvalue = -99;
+         }
+         finally
+         {
+             con.Close();
+             retvalue = 1;
+         }
+         return retvalue;
+     }
+
+
+     public int GetStartEndTime(string CourseId,string AttendanceDate, out string StartTime,out string EndTime)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         int returnValue = -99;
+         StartTime = "";
+         EndTime = "";
+         SqlCommand cmdVisitCount = new SqlCommand("usp_GetStartEndTime", con);
+         cmdVisitCount.CommandType = CommandType.StoredProcedure;
+         cmdVisitCount.Parameters.AddWithValue("@CourseId", CourseId);
+         cmdVisitCount.Parameters.AddWithValue("@AttendanceDate", AttendanceDate);
+
+         SqlParameter RetValue = new SqlParameter();
+         RetValue.Direction = ParameterDirection.ReturnValue;
+         RetValue.SqlDbType = SqlDbType.Int;
+         cmdVisitCount.Parameters.Add(RetValue);
+
+         SqlParameter vc = new SqlParameter("@StartTime", SqlDbType.VarChar,20);
+         vc.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc);
+
+         SqlParameter vc1 = new SqlParameter("@EndTime", SqlDbType.VarChar,20);
+         vc1.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc1);
+         try
+         {
+             con.Open();
+             cmdVisitCount.ExecuteNonQuery();
+             returnValue = Convert.ToInt32(RetValue.Value);
+             StartTime = vc.Value.ToString();
+             EndTime = vc1.Value.ToString();
+         }
+         catch (SqlException)
+         {
+             returnValue = -99;
+         }
+         finally
+         {
+             con.Close();
+         }
+         return returnValue;
+     }
+
+     public int MarkAttendance(int SSO, string CourseId,string AttendanceDate,string RandomCode,int Latitude,int Longitude)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         int returnValue = -99;
+         SqlCommand cmd = new SqlCommand("usp_MarkAttendance", con);
+         cmd.CommandType = CommandType.StoredProcedure;
+         cmd.Parameters.AddWithValue("@SSO", SSO);
+         cmd.Parameters.AddWithValue("@CourseId", CourseId);
+         cmd.Parameters.AddWithValue("@AttendanceDate", AttendanceDate);
+         cmd.Parameters.AddWithValue("@RandomCode", RandomCode);
+         cmd.Parameters.AddWithValue("@Latitude", Latitude);
+         cmd.Parameters.AddWithValue("@Longitude", Longitude);
+
+
+         SqlParameter RetValue = new SqlParameter();
+         RetValue.Direction = ParameterDirection.ReturnValue;
+         RetValue.SqlDbType = SqlDbType.Int;
+         cmd.Parameters.Add(RetValue);
+         try
+         {
+             con.Open();
+             cmd.ExecuteNonQuery();
+             returnValue = Convert.ToInt32(RetValue.Value);
+         }
+         catch (SqlException)
+         {
+             returnValue = -99;
+         }
+         finally
+         {
+             con.Close();
+         }
+         return returnValue;
+     }
+
 }

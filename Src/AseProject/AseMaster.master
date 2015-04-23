@@ -48,7 +48,14 @@
                   <li><a href="ComparePerformance.aspx">Compare Performance</a></li>
               </ul>
                 </li>
-              <li style="margin-left:500px;">
+                           <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Attendance <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="StudentAttendance.aspx">Mark Attendance</a></li>
+                  <li><a href="ComparePerformance.aspx">Compare Performance</a></li>
+              </ul>
+                </li>
+              <li style="margin-left:400px;">
                   <asp:LinkButton ID="btnLogout"  OnClick="btnLogout_Click" runat="server">Logout</asp:LinkButton>
               </li>
           </ul>

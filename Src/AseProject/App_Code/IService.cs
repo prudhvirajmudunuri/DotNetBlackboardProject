@@ -43,5 +43,13 @@ public interface IService
     [OperationContract]
     int AnalyzeCoursePerformance(string CourseId, out int Top1, out int Top2, out int Top3, out int Top4, out int Top5);
 
+    [OperationContract]
+    int SetAttendance(string CourseId, string AttendanceDate, int Latitude, int Longitude,string RandomCode,string StartTime,string EndTime);
+
+    [OperationContract]
+    int GetStartEndTime(string CourseId, string AttendanceDate, out string StartTime, out string EndTime);
+
+    [OperationContract]
+    int MarkAttendance(int SSO, string CourseId, string AttendanceDate, string RandomCode,int Latitude,int Longitude);
 
 }
