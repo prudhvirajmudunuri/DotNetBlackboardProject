@@ -57,6 +57,7 @@
                   <li><a href="AnalyzePerformanceInst.aspx">Analyze Performance</a></li>
               </ul>
                 </li>
+<<<<<<< HEAD
               <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Attendance <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -65,6 +66,9 @@
               </ul>
                 </li>
               <li style="margin-left:350px;">
+=======
+              <li style="margin-left:450px;">
+>>>>>>> parent of aafb52b... Database Updated And Attendance Module Done
                   <asp:LinkButton ID="btnLogout"  OnClick="btnLogout_Click" runat="server">Logout</asp:LinkButton>
               </li>
           </ul>
