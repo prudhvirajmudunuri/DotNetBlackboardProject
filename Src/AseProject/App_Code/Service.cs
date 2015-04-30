@@ -426,7 +426,6 @@ public class Service : IService
          return retvalue;
      }
 
-<<<<<<< HEAD
      public int SetAttendance(string CourseId,int InstructorId, string AttendanceDate, int Latitude, int Longitude, string RandomCode, string StartTime, string EndTime)
      {
          SqlConnection con;
@@ -600,6 +599,4 @@ public class Service : IService
          return retvalue;
      }
 
-=======
->>>>>>> parent of aafb52b... Database Updated And Attendance Module Done
 }
