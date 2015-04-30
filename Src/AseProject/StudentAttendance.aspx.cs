@@ -14,6 +14,7 @@ public partial class StudentAttendance : System.Web.UI.Page
         diverror2.Visible = false;
         divSuccess.Visible = false;
         divError3.Visible = false;
+        diverror4.Visible = false;
         ClientScript.RegisterStartupScript(GetType(), "Javascript", "javascript:Location(); ", true);
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -23,30 +24,41 @@ public partial class StudentAttendance : System.Web.UI.Page
         DateTime ct = Convert.ToDateTime(CurrentTime);
         string StartTime = "";
         string EndTime = "";
-        daobj.GetStartEndTime(ddlCourse.SelectedValue.ToString(),Date.Text,out StartTime,out EndTime);
-        DateTime st = Convert.ToDateTime(StartTime);
-        DateTime et = Convert.ToDateTime(EndTime);
-        int Latitude = Convert.ToInt32(Convert.ToDouble(latitude.Text));
-        int Longitude = Convert.ToInt32(Convert.ToDouble(longitude.Text));
-        if (ct >= st && ct <= et)
+        int ret2 = 0;
+        ret2=daobj.GetStartEndTime(ddlCourse.SelectedValue.ToString(),Date.Text,out StartTime,out EndTime);
+        DateTime st = DateTime.Now;
+        DateTime et = DateTime.Now;
+        if (ret2 == 1)
         {
-            ret = daobj.MarkAttendance(Convert.ToInt32(Session["SSO"]),ddlCourse.SelectedValue.ToString(),Date.Text,txtCode.Text,Latitude,Longitude);
-            if (ret == 1)
+            st = Convert.ToDateTime(StartTime);
+            et = Convert.ToDateTime(EndTime);
+
+            int Latitude = Convert.ToInt32(Convert.ToDouble(latitude.Text));
+            int Longitude = Convert.ToInt32(Convert.ToDouble(longitude.Text));
+            if (ct >= st && ct <= et)
             {
-                divSuccess.Visible = true;
+                ret = daobj.MarkAttendance(Convert.ToInt32(Session["SSO"]), ddlCourse.SelectedValue.ToString(), Date.Text, txtCode.Text, Latitude, Longitude);
+                if (ret == 1)
+                {
+                    divSuccess.Visible = true;
+                }
+                else if (ret == 2)
+                {
+                    diverror2.Visible = true;
+                }
+                else if (ret == 3)
+                {
+                    divError3.Visible = true;
+                }
             }
-            else if (ret == 2)
+            else
             {
-                diverror2.Visible = true;
-            }
-            else if (ret == 3)
-            {
-                divError3.Visible = true;
+                diverror.Visible = true;
             }
         }
-        else 
+        else if(ret2==2)
         {
-            diverror.Visible = true;
+            diverror4.Visible = true;
         }
         
     }

@@ -426,14 +426,15 @@ public class Service : IService
          return retvalue;
      }
 
-     public int SetAttendance(string CourseId, string AttendanceDate, int Latitude, int Longitude, string RandomCode, string StartTime, string EndTime)
+     public int SetAttendance(string CourseId,int InstructorId, string AttendanceDate, int Latitude, int Longitude, string RandomCode, string StartTime, string EndTime)
      {
          SqlConnection con;
          con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
          DataTable dt = new DataTable();
          int retvalue = -99;
-         SqlCommand cmd = new SqlCommand("INSERT INTO tbl_SetAttendance(CourseId,AttendanceDate,Latitude,Longitude,RandomCode,StartTime,EndTime) VALUES(@CourseId,@AttendanceDate,@Latitude,@Longitude,@RandomCode,@StartTime,@EndTime) ", con);
+         SqlCommand cmd = new SqlCommand("INSERT INTO tbl_SetAttendance(CourseId,InstructorId,AttendanceDate,Latitude,Longitude,RandomCode,StartTime,EndTime) VALUES(@CourseId,@InstructorId,@AttendanceDate,@Latitude,@Longitude,@RandomCode,@StartTime,@EndTime) ", con);
          cmd.Parameters.AddWithValue("@CourseId", CourseId);
+         cmd.Parameters.AddWithValue("@InstructorId", InstructorId);
          cmd.Parameters.AddWithValue("@AttendanceDate", AttendanceDate);
          cmd.Parameters.AddWithValue("@Latitude", Latitude);
          cmd.Parameters.AddWithValue("@Longitude", Longitude);
@@ -539,6 +540,63 @@ public class Service : IService
              con.Close();
          }
          return returnValue;
+     }
+
+     public DataTable GetAbsentStudentsList(string CourseId, string AttendanceDate)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         DataTable dt = new DataTable();
+         SqlDataAdapter da = new SqlDataAdapter();
+         da.SelectCommand = new SqlCommand("SELECT SSO FROM tbl_CourseEnrollment WHERE CourseId = @CourseId AND SSO NOT IN(SELECT SSO FROM tbl_Attendance WHERE CourseId=@CourseId AND AttendanceDate = @AttendanceDate)", con);
+         da.SelectCommand.Parameters.AddWithValue("@AttendanceDate", AttendanceDate);
+         da.SelectCommand.Parameters.AddWithValue("@CourseId", CourseId);
+         try
+         {
+             da.Fill(dt);
+         }
+         catch (SqlException)
+         {
+             return null;
+         }
+         catch (Exception)
+         {
+             return null;
+         }
+         return dt;
+     }
+
+
+     public int GenerateAttendance(int SSO,string CourseId, string AttendanceDate,string AttendanceStatus)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         DataTable dt = new DataTable();
+         int retvalue = -99;
+         SqlCommand cmd = new SqlCommand("INSERT INTO tbl_Attendance(SSO,CourseId,AttendanceDate,AttendanceStatus) VALUES(@SSO,@CourseId,@AttendanceDate,@AttendanceStatus) ", con);
+         cmd.Parameters.AddWithValue("@CourseId", CourseId);
+         cmd.Parameters.AddWithValue("@SSO", SSO);
+         cmd.Parameters.AddWithValue("@AttendanceDate", AttendanceDate);
+         cmd.Parameters.AddWithValue("@AttendanceStatus", AttendanceStatus);
+         try
+         {
+             con.Open();
+             cmd.ExecuteNonQuery();
+         }
+         catch (SqlException)
+         {
+             retvalue = -99;
+         }
+         catch (Exception)
+         {
+             retvalue = -99;
+         }
+         finally
+         {
+             con.Close();
+             retvalue = 1;
+         }
+         return retvalue;
      }
 
 }

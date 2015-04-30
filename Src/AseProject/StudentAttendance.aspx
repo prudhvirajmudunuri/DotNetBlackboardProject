@@ -93,6 +93,11 @@
  <div style="margin-left:350px;"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span><strong>Error! Attendance Code Expired</strong></div>
 </div>
+      <div class="alert alert-danger alert-dismissible" id="diverror4" runat="server" role="alert">
+                    
+ <div style="margin-left:350px;"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span><strong>Error! Incorrect Attendance Date</strong></div>
+</div>
 
       <div class="alert alert-danger alert-dismissible" id="diverror2" runat="server" role="alert">
                     
