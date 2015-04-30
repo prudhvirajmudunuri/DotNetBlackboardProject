@@ -40,6 +40,7 @@ public partial class StudentAttendance : System.Web.UI.Page
                 ret = daobj.MarkAttendance(Convert.ToInt32(Session["SSO"]), ddlCourse.SelectedValue.ToString(), Date.Text, txtCode.Text, Latitude, Longitude);
                 if (ret == 1)
                 {
+                    gvCheck.DataBind();
                     divSuccess.Visible = true;
                 }
                 else if (ret == 2)
@@ -61,5 +62,21 @@ public partial class StudentAttendance : System.Web.UI.Page
             diverror4.Visible = true;
         }
         
+    }
+
+    protected void gvCheck_DataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (e.Row.Cells[2].Text == "Present")
+            {
+                e.Row.Cells[2].ForeColor = System.Drawing.Color.Green;
+            }
+            else if (e.Row.Cells[2].Text == "Absent")
+            {
+                e.Row.Cells[2].ForeColor = System.Drawing.Color.Red;
+            }
+
+        }
     }
 }

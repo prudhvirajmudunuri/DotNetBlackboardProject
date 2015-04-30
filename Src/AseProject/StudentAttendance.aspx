@@ -112,6 +112,38 @@
   <span class="sr-only">Error:</span><strong>Error! You Need To Be in Class To Mark Attendance</strong></div>
 </div>
       </div>   
+        <h3>Check Attendance</h3>
+        <div >
+            <asp:GridView ID="gvCheck" OnRowDataBound="gvCheck_DataBound" style="margin-left:200px;" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataSourceID="Sqldsatt" ForeColor="Black" GridLines="Horizontal">
+                <Columns>
+                    <asp:BoundField DataField="CourseId" HeaderText="CourseId" SortExpression="CourseId">
+                        <HeaderStyle Font-Italic="True" Font-Size="Small" Width="200px" Height="35px" />
+                                <ItemStyle Font-Italic="True" Height="20px" />
+                                   </asp:BoundField>
+                    <asp:BoundField DataField="AttendanceDate" HeaderText="AttendanceDate" SortExpression="AttendanceDate" DataFormatString="{0:d}">
+                        <HeaderStyle Font-Italic="True" Font-Size="Small" Width="200px" Height="35px" />
+                                <ItemStyle Font-Italic="True" Height="20px" />
+                                   </asp:BoundField>
+                    <asp:BoundField DataField="AttendanceStatus" HeaderText="AttendanceStatus" SortExpression="AttendanceStatus">
+                        <HeaderStyle Font-Italic="True" Font-Size="Small" Width="200px" Height="35px" />
+                                <ItemStyle Font-Italic="True" Height="20px" />
+                                   </asp:BoundField>
+                </Columns>
+                <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                <SortedDescendingHeaderStyle BackColor="#242121" />
+            </asp:GridView>
+            <asp:SqlDataSource ID="Sqldsatt" runat="server" ConnectionString="<%$ ConnectionStrings:ASEDataBase %>" SelectCommand="SELECT [CourseId], [AttendanceDate], [AttendanceStatus] FROM [tbl_Attendance] WHERE ([SSO] = @SSO)">
+                <SelectParameters>
+                    <asp:SessionParameter DefaultValue="34234" Name="SSO" SessionField="SSO" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+        </div>
  </div>
 </asp:Content>
 

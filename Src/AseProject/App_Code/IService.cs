@@ -60,5 +60,10 @@ public interface IService
     int GenerateAttendance(int SSO, string CourseId, string AttendanceDate, string AttendanceStatus);
 
 
+    [OperationContract]
+    int AnalyzeAttendance(string CourseId, string AttendanceDate, out int Present, out int Absent);
+
+    [OperationContract]
+    DataTable GetAttendance(string CourseId, int SSO);
 
 }

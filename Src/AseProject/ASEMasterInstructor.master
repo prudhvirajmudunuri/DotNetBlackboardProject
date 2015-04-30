@@ -19,7 +19,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" novalidate="novalidate">
     <asp:ScriptManager ID="sc1" runat="server"></asp:ScriptManager>
         <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -61,7 +61,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Attendance <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="AttendanceInstructor.aspx">Set Attendance</a></li>
-                  <li><a href="AnalyzePerformanceInst.aspx">Analyze Performance</a></li>
+                  <li><a href="AnalyzeAttendance.aspx">Analyze Attendance</a></li>
               </ul>
                 </li>
               <li style="margin-left:350px;">

@@ -599,4 +599,70 @@ public class Service : IService
          return retvalue;
      }
 
+     public int AnalyzeAttendance(string CourseId, string AttendanceDate, out int Present, out int Absent)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         int returnValue = -99;
+         Present = -99;
+         Absent = -99;
+         SqlCommand cmdVisitCount = new SqlCommand("usp_AnalyzeAttendance", con);
+         cmdVisitCount.CommandType = CommandType.StoredProcedure;
+         cmdVisitCount.Parameters.AddWithValue("@CourseId", CourseId);
+         cmdVisitCount.Parameters.AddWithValue("@AttendanceDate", AttendanceDate);
+
+         SqlParameter RetValue = new SqlParameter();
+         RetValue.Direction = ParameterDirection.ReturnValue;
+         RetValue.SqlDbType = SqlDbType.Int;
+         cmdVisitCount.Parameters.Add(RetValue);
+
+         SqlParameter vc = new SqlParameter("@Present", SqlDbType.Int);
+         vc.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc);
+         SqlParameter vc1 = new SqlParameter("@Absent", SqlDbType.Int);
+         vc1.Direction = ParameterDirection.Output;
+         cmdVisitCount.Parameters.Add(vc1);
+         try
+         {
+             con.Open();
+             cmdVisitCount.ExecuteNonQuery();
+             returnValue = Convert.ToInt32(RetValue.Value);
+             Present = Convert.ToInt32(vc.Value);
+             Absent = Convert.ToInt32(vc1.Value);
+         }
+         catch (SqlException)
+         {
+             returnValue = -99;
+         }
+         finally
+         {
+             con.Close();
+         }
+         return returnValue;
+     }
+
+     public DataTable GetAttendance(string CourseId, int SSO)
+     {
+         SqlConnection con;
+         con = new SqlConnection(ConfigurationManager.ConnectionStrings["ASEDataBase"].ConnectionString);
+         DataTable dt = new DataTable();
+         SqlDataAdapter da = new SqlDataAdapter();
+         da.SelectCommand = new SqlCommand("SELECT AttendanceDate,AttendanceStatus FROM tbl_Attendance WHERE CourseId = @CourseId AND SSO = @SSO", con);
+         da.SelectCommand.Parameters.AddWithValue("@SSO", SSO);
+         da.SelectCommand.Parameters.AddWithValue("@CourseId", CourseId);
+         try
+         {
+             da.Fill(dt);
+         }
+         catch (SqlException)
+         {
+             return null;
+         }
+         catch (Exception)
+         {
+             return null;
+         }
+         return dt;
+     }
+
 }
